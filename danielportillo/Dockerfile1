@@ -1,0 +1,18 @@
+FROM alpine:latest
+MAINTAINER 26danielportillo@gmail.com
+
+ENV DEBIAN_FRONTEND=nonintereactive
+
+RUN apk update
+RUN apk upgrade
+RUN apk add apache2
+RUN apk add openrc 
+RUN rc-update add apache2
+EXPOSE 80 443 
+WORKDIR /var/www/localhost/htdocs
+RUN rm index.html
+RUN wget www.icesi.edu.co
+
+CMD ["/usr/sbin/httpd","-D", "FOREGROUND"]
+
+

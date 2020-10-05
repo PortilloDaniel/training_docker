@@ -1,0 +1,15 @@
+FROM ubuntu:latest
+MAINTAINER 26danielportillo@gmail.com
+
+ENV DEBIAN_FRONTEND=nonintereactive
+RUN apt update -y
+RUN apt install -y apache2
+RUN apt install wget
+RUN echo "ServerName 127.12.0.2" >> /etc/hosts
+WORKDIR /var/www/html/
+
+RUN rm index.html
+RUN wget icesi.edu.co
+
+CMD service apache2 start
+
